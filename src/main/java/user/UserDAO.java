@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UserDAO {
-    
     private Connection conn;
     private PreparedStatement pstmt;
     private ResultSet rs;
@@ -40,6 +39,30 @@ public class UserDAO {
             e.printStackTrace();
         }
         return -2; // 데이터베이스 오류
+    }
+
+    public int join(User user){
+        String SQL = "INSERT INTO USER VALUES (?, ?, ?, ?, ?)";
+        try {
+        	/*
+        	System.out.println("join 호출됨");
+        	System.out.println(user.getUserID());
+        	System.out.println(user.getUserPassword());
+        	System.out.println(user.getUserName());
+        	System.out.println(user.getUserGender());
+        	System.out.println(user.getUserEmail());
+        	*/
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, user.getUserID());
+            pstmt.setString(2, user.getUserPassword());
+            pstmt.setString(3, user.getUserName());
+            pstmt.setString(4, user.getUserGender());
+            pstmt.setString(5, user.getUserEmail());
+            return pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데베 오류
     }
 
 }
