@@ -99,6 +99,7 @@ public class BbsDAO {
 
     public boolean nextPage(int pageNumber){
         String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1";
+        ArrayList<Bbs> list = new ArrayList<Bbs>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1,getNext()-(pageNumber-1)*10);
@@ -110,6 +111,29 @@ public class BbsDAO {
             e.printStackTrace();
         }
         return false; //데이터베이스 오류
+    }
+
+    public Bbs getBbs(int bbsID){
+        String SQL = "SELECT * FROM BBS WHERE bbsID = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1,bbsID);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                Bbs bbs = new Bbs();
+                bbs.setBbsID(rs.getInt(1));
+                bbs.setBbsCategory(rs.getString(2));
+                bbs.setBbsTitle(rs.getString(3));
+                bbs.setUserID(rs.getString(4));
+                bbs.setBbsDate(rs.getString(5));
+                bbs.setBbsContent(rs.getString(6));
+                bbs.setBbsAvailable(rs.getInt(7));
+                return bbs;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; //데이터베이스 오류
     }
 
 }
