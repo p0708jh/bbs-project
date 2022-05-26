@@ -17,6 +17,13 @@
         if(session.getAttribute("userID") != null){
             userID=(String)session.getAttribute("userID");
         }
+        else if(userID == null){
+                PrintWriter script = response.getWriter();
+                script.println("<script>");
+                script.println("alert('로그인이 필요합니다.')");
+                script.println("location.href = 'login.jsp'");
+                script.println("</script>");
+        }
     %>
     <nav class="navbar navbar-default">
         <div class="navbar-header">
@@ -94,7 +101,7 @@
                                             <input type="radio" name="bbsCategory" autocomplete="off" value="주거환경" checked>주거환경
                                         </label>
                                         <label class="btn btn-primary" style="margin:auto 10px;">
-                                            <input type="radio" name="bbsCategory" autocomplete="off" value="생활비" checked>생활비
+                                            <input type="radio" name="bbsCategory" autocomplete="off" value="생활비">생활비
                                         </label>
                                     </div> 
                                 </div>           

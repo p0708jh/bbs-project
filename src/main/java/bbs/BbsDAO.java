@@ -136,4 +136,35 @@ public class BbsDAO {
         return null; //데이터베이스 오류
     }
 
+    public int update(int bbsID, String bbsCategory, String bbsTitle, String bbsContent){
+        String SQL = "UPDATE BBS SET bbsCategory = ?, bbsTitle = ?, bbsContent = ?,bbsDate = ? WHERE bbsID = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1,bbsCategory);
+            pstmt.setString(2,bbsTitle+"(수정됨)");
+            pstmt.setString(3,bbsContent);
+            pstmt.setString(4,getDate());
+            pstmt.setInt(5,bbsID);
+            
+            return pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; //데이터베이스 오류
+    }
+
+    public int delete(int bbsID){
+        String SQL = "UPDATE BBS SET bbsAvailable = 0 WHERE bbsID = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1,bbsID);
+            
+            return pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; //데이터베이스 오류
+
+    }
+
 }
