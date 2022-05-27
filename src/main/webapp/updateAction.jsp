@@ -62,7 +62,7 @@
                 if(result == -1){
                     PrintWriter script = response.getWriter();
                     script.println("<script>");
-                    script.println("alert('수정에 실패하였습니다.(최대 1900자)')"); // -1은 데이터베이스 오류
+                    script.println("alert(' 수정에 실패하였습니다.(최대 1900자)')"); // -1은 데이터베이스 오류
                     script.println("history.back()");
                     script.println("</script>");
                 }

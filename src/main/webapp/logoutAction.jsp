@@ -13,7 +13,7 @@
         <%
             session.invalidate();
         %>
-        <script> location.href= 'main.jsp';</script>
+        <script> location.href= '../index.html';</script>
     </body>
 
 </html>

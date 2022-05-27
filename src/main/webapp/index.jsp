@@ -11,7 +11,7 @@
 
 <body>
     <script>
-        location.href = "main.jsp";
+        location.href = "../index.html";
     </script>
 </body>
 
